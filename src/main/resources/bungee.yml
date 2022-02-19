@@ -1,0 +1,3 @@
+name: WebRequest-Plugin
+version: 1.0.0
+main: net.neverstopgaming.webrequest.bungee.BungeeMain

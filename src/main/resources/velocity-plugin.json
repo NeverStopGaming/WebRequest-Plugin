@@ -1,0 +1,10 @@
+{
+  "id": "webrequester_plugin",
+  "name": "WebRequester-Plugin",
+  "version": "1.0",
+  "description": "Plugin to monitor the uptime of your minecraft server",
+  "authors": [
+    "Chaoten"
+  ],
+  "main": "net.neverstopgaming.webrequest.velocity.VelocityMain"
+}

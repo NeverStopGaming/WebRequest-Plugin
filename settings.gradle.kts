@@ -1,4 +1,4 @@
-rootProject.name = "Template"
+rootProject.name = "WebRequest-Plugin"
 
 //Repositorys for Plugins
 pluginManagement {

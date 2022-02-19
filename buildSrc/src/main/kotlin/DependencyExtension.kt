@@ -38,7 +38,7 @@ object Properties {
     val group = "net.neverstopgaming"
 
     @JvmStatic
-    val version = "1.0.0-SNAPSHOT"
+    val version = "1.0"
 
     @JvmStatic
     val versions: MutableMap<String, String> = mutableMapOf<String, String>().also {
@@ -75,7 +75,8 @@ object Properties {
             )
             it["minecraft"] = mutableMapOf(
                 "bukkit" to "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT",
-                "velocity" to "com.velocitypowered:velocity-api:3.0.1"
+                "velocity" to "com.velocitypowered:velocity-api:3.0.1",
+                "bungee" to "net.md-5:bungeecord-api:1.16-R0.4",
             )
             it["simplecloud"] = mutableMapOf(
                 "api" to "eu.thesimplecloud.simplecloud:simplecloud-api:%version%",

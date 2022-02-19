@@ -28,21 +28,14 @@ repositories {
             maven(field.get(null))
         }
     }
-    maven {
-        url = uri("https://repo.neverstopgaming.net/repository/maven-internal/")
-        credentials {
-            this.username = System.getenv("repoName") ?: System.getenv("NEXUS_USER") ?: System.getProperty("publishName")
-            this.password = System.getenv("repoPassword") ?: System.getenv("NEXUS_PASSWORD") ?: System.getProperty("publishPassword")
-        }
-    }
 }
 
 dependencies {
     testImplementation(kotlin("test"))
-    compileOnly(getDependency("simplecloud", "plugin"))
-    compileOnly(getDependency("nsg", "api"))
-    compileOnly(getDependency("nsg", "core"))
-    compileOnly(getDependency("components", "minimessage"))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    compileOnly(getDependency("minecraft","velocity"))
+    compileOnly(getDependency("minecraft","bungee"))
 }
 
 tasks.test {
@@ -51,6 +44,30 @@ tasks.test {
 
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+tasks {
+
+    shadowJar {
+
+        archiveFileName.set("${project.name}-${Properties.version}-full.jar")
+        exclude("META-INF/**")
+
+        doFirst {
+            //Set Manifest
+            manifest {
+                attributes["Implementation-Title"] = project.name
+                attributes["Implementation-Version"] = Properties.version
+                attributes["Specification-Version"] = Properties.version
+                attributes["Implementation-Vendor"] = "NeverStopGaming.net"
+                attributes["Built-By"] = System.getProperty("user.name")
+                attributes["Build-Jdk"] = System.getProperty("java.version")
+                attributes["Created-By"] = "Gradle ${gradle.gradleVersion}"
+                attributes["Commit-Hash"] = getCommitHash()
+                attributes["Launcher-Agent-Class"] = "eu.vironlab.vextension.dependency.DependencyAgent"
+            }
+        }
+    }
 }
 
 if (System.getProperty("publishName") != null && System.getProperty("publishPassword") != null) {
