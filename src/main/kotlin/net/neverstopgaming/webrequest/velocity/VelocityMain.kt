@@ -11,13 +11,13 @@ import org.slf4j.Logger
 class VelocityMain @Inject constructor(val server: ProxyServer, private val logger: Logger) {
 
     private val config = VelocityConfig()
+    val requester = Requester(config)
 
     @Subscribe
     fun onReady(e: ProxyInitializeEvent) {
 
         logger.debug("Config loaded")
 
-        Requester(config)
         logger.debug("Requester loaded")
     }
 }

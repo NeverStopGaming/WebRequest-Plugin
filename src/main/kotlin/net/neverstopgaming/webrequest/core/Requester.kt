@@ -13,12 +13,18 @@ class Requester(config: Config) {
 
         GlobalScope.launch {
 
+            val requestes = arrayListOf<Request>()
+
+            for(url in config.urls) {
+                requestes.add(Request.Builder().url(url).build())
+            }
+
             while (this.isActive){
 
-                for(url in config.urls) {
-                    val request = Request.Builder().url(url).build()
+                for (request in requestes) {
 
                     client.newCall(request).execute()
+                    client.dispatcher.executorService.shutdown()
 
                     delay(config.interval * 1000)
                 }
